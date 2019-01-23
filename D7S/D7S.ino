@@ -35,44 +35,11 @@ void setup()
 //  Wire.begin();
 
   //wait until the D7S is ready
-  
-  while (!D7S.isReady())
-  
-  {
-    Serial.print(".");
-    delay(500);
-  }
-
-  Serial.println("STARTED");  
-  //setting the D7S to switch the axis at inizialization time
-  Serial.println("Setting D7S sensor to switch axis at inizialization time.");
-  D7S.setAxis(SWITCH_AT_INSTALLATION);
-
-  Serial.println("Initializing the D7S sensor in 2 seconds. Please keep it steady during the initializing process.");
-  delay(2000);
-  Serial.print("Initializing...");
-  //start the initial installation procedure
-  D7S.initialize();
-  D7S.resetEvents();
-  D7S.clearMemory(CLEAR_QUAKE);
-  
-  //wait until the D7S is ready (the initializing process is ended)
   while (!D7S.isReady())
   {
     Serial.print(".");
     delay(500);
   }
-  Serial.println("INITIALIZED!");
-
-  //check if there there was a collapse (if this is the first time the D7S is put in place the installation data may be wrong)
-  if (D7S.isInCollapse())
-  {
-    handleCollapse();
-  }
-
-  //reset the events shutoff/collapse memorized into the D7S
-  D7S.resetEvents();
-
   Serial.println("\nListening for earthquakes!");
 }
 
