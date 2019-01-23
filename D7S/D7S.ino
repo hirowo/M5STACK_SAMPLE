@@ -29,8 +29,10 @@ void setup()
   Serial.print("Starting D7S communications (it may take some time)...");
   //start D7S connection
   D7S.begin();
+  D7S.setAxis(SWITCH_AT_INSTALLATION);
+  D7S.initialize();
+  
 //  Wire.begin();
-
 
   //wait until the D7S is ready
   
